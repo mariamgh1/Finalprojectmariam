@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "776430777218",
+    "firebase_url": "https://finalprojectmariam-35e8b.firebaseio.com",
+    "project_id": "finalprojectmariam-35e8b",
+    "storage_bucket": "finalprojectmariam-35e8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776430777218:android:3f236bebf09882effc559b",
+        "android_client_info": {
+          "package_name": "ghadban.mariam.Finalprojectmariam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776430777218-lpvrcq7cnn32pcfdl4d24bfeve9cisju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNlQUvhJCeHRATswawF_uQ5V79DJdFOeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776430777218-lpvrcq7cnn32pcfdl4d24bfeve9cisju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

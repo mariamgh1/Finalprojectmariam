@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import ghadban.mariam.finalprojectmariam.MapActivity;
 import ghadban.mariam.finalprojectmariam.MyUtils.Myvaildations;
 import ghadban.mariam.finalprojectmariam.R;
 
@@ -99,9 +100,9 @@ public class SignIn extends AppCompatActivity {
         });
     }
 
-    public void btn_main(View view)
+    public void btn_map(View view)
     {
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MapActivity.class));
     }
 
 }

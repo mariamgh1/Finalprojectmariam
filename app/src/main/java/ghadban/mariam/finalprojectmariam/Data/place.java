@@ -43,10 +43,7 @@ public class place
         public void setComments(HashMap<String, String> comments) { this.comments = comments; }
 
 
-    public void addcomment(String id, String s)
-    {
-     comments.put(id, s);
-    }
+    public void addcomment(String id, String s) { comments.put(id, s); }
 
     @Override
     public String toString() {

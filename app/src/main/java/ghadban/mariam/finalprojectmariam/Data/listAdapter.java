@@ -10,6 +10,7 @@ public class listAdapter
     }
 
     public ArrayList<place> getPlaceslist() { return placeslist; }
-
     public void setPlaceslist(ArrayList<place> placeslist) { this.placeslist = placeslist; }
+
+    public void addplaces(place p) { placeslist.add(p);}
 }

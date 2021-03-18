@@ -9,7 +9,6 @@ public class place
         private String location;//mo93
         private String category;//mjal almkan
         private float Evaluation;// ta9im almkan
-        private HashMap<String, String> comments = new HashMap<String, String>();// masfofat comments
 
 
     public place(){
@@ -39,11 +38,6 @@ public class place
         public float getEvaluation() { return Evaluation; }
         public void setEvaluation(float evaluation) { this.Evaluation = evaluation; }
 
-        public HashMap<String, String> getComments() { return comments; }
-        public void setComments(HashMap<String, String> comments) { this.comments = comments; }
-
-
-    public void addcomment(String id, String s) { comments.put(id, s); }
 
     @Override
     public String toString() {
@@ -51,7 +45,6 @@ public class place
                 "name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
-                ", Evaluation=" + Evaluation +
-                ", comments=" + comments +'}';
+                ", Evaluation=" + Evaluation +'}';
     }
 }

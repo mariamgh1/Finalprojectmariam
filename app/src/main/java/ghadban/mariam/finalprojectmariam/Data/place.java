@@ -8,7 +8,7 @@ public class place
         private String name;//asm almkan
         private String location;//mo93
         private String category;//mjal almkan
-        private float Evaluation;// ta9im almkan
+        private String Evaluation;// ta9im almkan
 
 
     public place(){
@@ -35,8 +35,8 @@ public class place
             this.category = category;
         }
 
-        public float getEvaluation() { return Evaluation; }
-        public void setEvaluation(float evaluation) { this.Evaluation = evaluation; }
+        public String getEvaluation() { return Evaluation; }
+        public void setEvaluation(String evaluation) { this.Evaluation = evaluation; }
 
 
     @Override

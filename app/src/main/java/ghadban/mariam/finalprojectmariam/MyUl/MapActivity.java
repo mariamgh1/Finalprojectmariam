@@ -1,4 +1,4 @@
-package ghadban.mariam.finalprojectmariam;
+package ghadban.mariam.finalprojectmariam.MyUl;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -10,6 +10,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import ghadban.mariam.finalprojectmariam.R;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 

@@ -38,7 +38,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="316dp"
-        tools:context=".MapActivity" />
+        tools:context=".MyUl.MapActivity" />
 
     <ListView
         android:layout_width="match_parent"

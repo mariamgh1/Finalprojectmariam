@@ -1,4 +1,4 @@
-package ghadban.mariam.finalprojectmariam.Data;
+package ghadban.mariam.finalprojectmariam.MyUl;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +14,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import ghadban.mariam.finalprojectmariam.Data.place;
 import ghadban.mariam.finalprojectmariam.R;
 
 public class Add extends AppCompatActivity {
+    private static final int PERMISSION_CODE = 100;
+    private static final int IMAGE_PICK_CODE = 100;
+
     private ImageView Addimg;
     private EditText StoreName, Addlocation, AddCategory, Evaluation;
     private Button ttsave;
@@ -34,26 +38,69 @@ public class Add extends AppCompatActivity {
         Evaluation = findViewById(R.id.Evaluation);
         ttsave = findViewById(R.id.ttsave);
 
-        Addimg.setOnClickListener(new View.OnClickListener()
-    {
+        ttsave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //check runtime permission
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        //permission not granted, request it.
-                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        //show popup for runtime permission
-                        requestPermissions(permissions, PERMISSION_CODE);
-                    }
-                    else{
-                        //permission already granted
-                        pickImageFromGallery();
-                    }
-
-                }
+            public void onClick(View v) {
+                checkValidateForm();
             }
         });
+    }
+
+
+    public void checkValidateForm() {
+        String sname = StoreName.getText().toString();
+        String location = Addlocation.getText().toString();
+        String category = AddCategory.getText().toString();
+        String evlu = Evaluation.getText().toString();
+        boolean isok = true;
+        if (sname.length() < 2) {
+            isok = false;
+            StoreName.setError("at least two char");
+        }
+        if (location.length() < 3) {
+            isok = false;
+        }
+        if (category.length() < 3) {
+            isok = false;
+        }
+        if (evlu.length() < 2) {
+            isok = false;
+        }
+        if(isok){
+            place place=new place();
+            place.setName(sname);
+            place.setLocation(location);
+            place.setCategory(category);
+            place.setEvaluation(evlu);
+            savePlace(place);
+    }
+
+
+        Addimg.setOnClickListener(new View.OnClickListener()
+    {
+        @Override
+        public void onClick (View view){
+        //check runtime permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                //permission not granted, request it.
+                String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                //show popup for runtime permission
+                requestPermissions(permissions, PERMISSION_CODE);
+            } else {
+                //permission already granted
+                pickImageFromGallery();
+            }
+
+        }
+    }
+    });
+}
+
+    private void savePlace(place place) {
+
+
+
     }
 
     private void pickImageFromGallery(){
@@ -87,5 +134,7 @@ public class Add extends AppCompatActivity {
             Addimg.setImageURI(data.getData());
         }
     }
+
+
 
 }

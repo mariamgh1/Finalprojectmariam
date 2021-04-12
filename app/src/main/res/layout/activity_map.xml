@@ -10,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <?xml version="1.0" encoding="utf-8"?>
+
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/ttadd"
             android:layout_width="51dp"
             android:layout_height="wrap_content"
             android:background="#F6F4F4"
@@ -23,11 +23,11 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spin"
             android:layout_width="405dp"
             android:layout_height="49dp"
             android:layout_weight="1"
-            android:background="@drawable/spinner_bg"
+
             android:paddingBottom="13dp"
 
             />
@@ -41,6 +41,7 @@
         tools:context=".MyUl.MapActivity" />
 
     <ListView
+        android:id="@+id/Stlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

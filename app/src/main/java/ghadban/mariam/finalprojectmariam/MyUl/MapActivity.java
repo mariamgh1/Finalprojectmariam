@@ -2,7 +2,12 @@ package ghadban.mariam.finalprojectmariam.MyUl;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,6 +21,9 @@ import ghadban.mariam.finalprojectmariam.R;
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Button ttadd;
+    private Spinner spin;
+    private ListView Stlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        ttadd = findViewById(R.id.ttadd);
+        spin = findViewById(R.id.spin);
+        Stlist = findViewById(R.id.Stlist);
+
+        ttadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MapActivity.this, Add.class);
+                startActivity(i);
+            }
+        });
     }
 
     /**

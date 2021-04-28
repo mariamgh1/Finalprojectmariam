@@ -14,10 +14,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import ghadban.mariam.finalprojectmariam.Data.place;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import ghadban.mariam.finalprojectmariam.Data.Place;
 import ghadban.mariam.finalprojectmariam.R;
 
-public class Add extends AppCompatActivity {
+public class AddPlaceActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 100;
     private static final int IMAGE_PICK_CODE = 100;
 
@@ -67,7 +73,7 @@ public class Add extends AppCompatActivity {
             isok = false;
         }
         if(isok){
-            place place=new place();
+            Place place=new Place();
             place.setName(sname);
             place.setLocation(location);
             place.setCategory(category);
@@ -97,10 +103,33 @@ public class Add extends AppCompatActivity {
     });
 }
 
-    private void savePlace(place place) {
-
-
-
+    private void savePlace(Place place) {
+        //1.
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //2.
+        DatabaseReference reference = database.getReference();
+        //3. user id
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+        String uid = auth.getCurrentUser().getUid();
+        //4. My Object Key
+        String key = reference.child("Places").push().getKey();
+        //5. update ypur Object
+        place.setOwner(uid);
+        place.setKey(key);
+        //6. actual stroring
+        reference.child("Places").child(uid).child(key).setValue(place).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(AddPlaceActivity.this, "add successful", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else {
+                    Toast.makeText(AddPlaceActivity.this, "add failed"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    task.getException().printStackTrace();
+                }
+            }
+        });
     }
 
     private void pickImageFromGallery(){
@@ -134,7 +163,5 @@ public class Add extends AppCompatActivity {
             Addimg.setImageURI(data.getData());
         }
     }
-
-
 
 }

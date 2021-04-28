@@ -3,7 +3,9 @@ package ghadban.mariam.finalprojectmariam.MyUl;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,6 +34,13 @@ public class SignUp extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etConPassword = findViewById(R.id.etConPassword);
         savebtn = findViewById(R.id.savebtn);
+
+        savebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateFrom();
+            }
+        });
     }
 
     private void validateFrom(){
@@ -54,16 +63,16 @@ public class SignUp extends AppCompatActivity {
             isOK = false;
             etEmail.setError("Wrong E-mail. Try again");
         }
-        if(!etPassword.equals(etConPassword)){
+        if(!pass.equals(cpass)){
             isOK=false;
             etConPassword.setError("Password must be the same");
         }
         else {
-            Myvaildations myVaildations = new Myvaildations();
-            if (myVaildations.validatePasword(pass) == false) {
-                isOK = false;
-                etPassword.setError("Invalid Password");
-            }
+//            Myvaildations myVaildations = new Myvaildations();
+//            if (myVaildations.validatePasword(pass) == false) {
+//                isOK = false;
+//                etPassword.setError("Invalid Password");
+//            }
         }
 
         if(isOK)// isok=true
@@ -89,6 +98,8 @@ public class SignUp extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(SignUp.this, "Successfully Signin up", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(SignUp.this, MapActivity.class);
+                    startActivity(i);
                     finish();
                 }
                 else

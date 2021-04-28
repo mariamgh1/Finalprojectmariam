@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class listAdapter
 {
-    private ArrayList<place>placeslist = new ArrayList<place>();
+    private ArrayList<Place>placeslist = new ArrayList<Place>();
 
     public listAdapter(){
     }
 
-    public ArrayList<place> getPlaceslist() { return placeslist; }
-    public void setPlaceslist(ArrayList<place> placeslist) { this.placeslist = placeslist; }
+    public ArrayList<Place> getPlaceslist() { return placeslist; }
+    public void setPlaceslist(ArrayList<Place> placeslist) { this.placeslist = placeslist; }
 
-    public void addplaces(place p) { placeslist.add(p);}
+    public void addplaces(Place p) { placeslist.add(p);}
 }

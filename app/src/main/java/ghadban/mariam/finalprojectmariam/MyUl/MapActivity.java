@@ -3,6 +3,7 @@ package ghadban.mariam.finalprojectmariam.MyUl;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.content.RestrictionEntry;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        getSupportActionBar().setTitle("Map");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -41,10 +43,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         ttadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MapActivity.this, Add.class);
+                Intent i = new Intent(MapActivity.this, AddPlaceActivity.class);
                 startActivity(i);
             }
         });
+    }
+
+    private RestrictionEntry getSupportActionBar() {
+        return null;
     }
 
     /**

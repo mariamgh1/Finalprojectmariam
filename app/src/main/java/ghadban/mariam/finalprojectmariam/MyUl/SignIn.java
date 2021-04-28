@@ -32,7 +32,7 @@ public class SignIn extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser()!=null)// user signd in before
         {
-            Intent i = new Intent(getBaseContext(),MainActivity.class);
+            Intent i = new Intent(getBaseContext(),MapActivity.class);
             finish();
             startActivity(i);
         }
@@ -56,6 +56,7 @@ public class SignIn extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
     }
 
 
@@ -87,7 +88,7 @@ public class SignIn extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful())
                 {
-                    Intent i=new Intent(SignIn.this,MainActivity.class);
+                    Intent i=new Intent(SignIn.this,MapActivity.class);
                     startActivity(i);
                 }
                 else

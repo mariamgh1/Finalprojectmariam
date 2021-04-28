@@ -3,15 +3,17 @@ package ghadban.mariam.finalprojectmariam.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class place
+public class Place
 {
         private String name;//asm almkan
         private String location;//mo93
         private String category;//mjal almkan
         private String Evaluation;// ta9im almkan
+    private String owner;
+    private String key;
 
 
-    public place(){
+    public Place(){
         }
 
         public String getName(){
@@ -46,5 +48,21 @@ public class place
                 ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
                 ", Evaluation=" + Evaluation +'}';
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
     }
 }

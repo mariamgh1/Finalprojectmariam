@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.RestrictionEntry;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,10 +19,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import ghadban.mariam.finalprojectmariam.R;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback{
 
     private GoogleMap mMap;
     private Button ttadd;
@@ -30,7 +34,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        getSupportActionBar().setTitle("Map");
+       // getSupportActionBar().setTitle("Map");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -40,11 +44,38 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         spin = findViewById(R.id.spin);
         Stlist = findViewById(R.id.Stlist);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(adapter);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==4)
+                {
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.signOut();
+                    Intent i = new Intent(MapActivity.this, SignIn.class);
+                    startActivity(i);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         ttadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MapActivity.this, AddPlaceActivity.class);
-                startActivity(i);
+                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                if (firebaseAuth.getCurrentUser()!= null){
+                    Intent i = new Intent(MapActivity.this, AddPlaceActivity.class);
+                    startActivity(i);
+            }
+                else {
+                    Toast.makeText(MapActivity.this, "You have to sign in", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -71,4 +102,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+
 }

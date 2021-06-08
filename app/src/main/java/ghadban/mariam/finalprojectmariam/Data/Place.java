@@ -5,18 +5,19 @@ import java.util.HashMap;
 
 public class Place
 {
-        private String name;//asm almkan
+        private static String name;//asm almkan
         private String location;//mo93
         private String category;//mjal almkan
         private String Evaluation;// ta9im almkan
-    private String owner;
-    private String key;
+        private String Image;
+        private String owner;
+        private String key;
 
 
     public Place(){
         }
 
-        public String getName(){
+        public static String getName(){
             return name;
         }
         public void setName(String name){
@@ -40,6 +41,23 @@ public class Place
         public String getEvaluation() { return Evaluation; }
         public void setEvaluation(String evaluation) { this.Evaluation = evaluation; }
 
+        public String getImage() { return Image; }
+        public void setImage(String Image) { this.Image = Image; }
+
+        public String getOwner() {
+        return owner;
+    }
+        public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+        public String getKey() {
+        return key;
+    }
+        public void setKey(String key) {
+        this.key = key;
+    }
+
 
     @Override
     public String toString() {
@@ -50,19 +68,4 @@ public class Place
                 ", Evaluation=" + Evaluation +'}';
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getKey() {
-        return key;
-    }
 }

@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,21 +18,37 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 import ghadban.mariam.finalprojectmariam.Data.Place;
+import ghadban.mariam.finalprojectmariam.Data.ListAdapter;
 import ghadban.mariam.finalprojectmariam.R;
 
 public class AddPlaceActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 100;
-    private static final int IMAGE_PICK_CODE = 100;
+    private static final int IMAGE_PICK_CODE = 101;
 
+    private ListAdapter lstdapter;
     private ImageView Addimg;
     private EditText StoreName, Addlocation, AddCategory, Evaluation;
     private Button ttsave;
+    private Uri toUploadimageUri;//local address
+    private Uri downladuri;//firebase/cloude address
+    private Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +67,26 @@ public class AddPlaceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkValidateForm();
+            }
+        });
+        Addimg.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view){
+                //check runtime permission
+                Toast.makeText(AddPlaceActivity.this, "image", Toast.LENGTH_SHORT).show();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        //permission not granted, request it.
+                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                        //show popup for runtime permission
+                        requestPermissions(permissions, PERMISSION_CODE);
+                    } else {
+                        //permission already granted
+                        pickImageFromGallery();
+                    }
+
+                }
             }
         });
     }
@@ -72,35 +111,21 @@ public class AddPlaceActivity extends AppCompatActivity {
         if (evlu.length() < 2) {
             isok = false;
         }
+        if(toUploadimageUri == null){
+            isok = false;
+            Toast.makeText(this, "choose image", Toast.LENGTH_SHORT).show();
+        }
         if(isok){
-            Place place=new Place();
+            place=new Place();
             place.setName(sname);
             place.setLocation(location);
             place.setCategory(category);
             place.setEvaluation(evlu);
-            savePlace(place);
+            uploadImage(toUploadimageUri);
     }
 
 
-        Addimg.setOnClickListener(new View.OnClickListener()
-    {
-        @Override
-        public void onClick (View view){
-        //check runtime permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                //permission not granted, request it.
-                String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                //show popup for runtime permission
-                requestPermissions(permissions, PERMISSION_CODE);
-            } else {
-                //permission already granted
-                pickImageFromGallery();
-            }
 
-        }
-    }
-    });
 }
 
     private void savePlace(Place place) {
@@ -132,6 +157,41 @@ public class AddPlaceActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        readTasksFromFirebase();
+    }
+
+    public void readTasksFromFirebase()
+    {
+        FirebaseDatabase database=FirebaseDatabase.getInstance();//to connect to database
+        FirebaseAuth auth=FirebaseAuth.getInstance();//to get current UID
+        String uid = auth.getUid();
+        DatabaseReference reference = database.getReference();
+
+        reference.child("Places");
+        reference.child(uid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstdapter.clear();
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    Place t = d.getValue(Place.class);
+                    Log.d(" Place ", t.toString());
+                    lstdapter.add(t);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     private void pickImageFromGallery(){
         //intent to pick image
         Intent intent=new Intent(Intent.ACTION_PICK);
@@ -160,8 +220,56 @@ public class AddPlaceActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if (resultCode==RESULT_OK && requestCode== IMAGE_PICK_CODE){
             //set image to image view
-            Addimg.setImageURI(data.getData());
+             toUploadimageUri = data.getData();
+            Addimg.setImageURI(toUploadimageUri);
         }
     }
+    //upload: 5
+    private void uploadImage(Uri filePath) {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+            FirebaseStorage storage= FirebaseStorage.getInstance();
+            StorageReference storageReference = storage.getReference();
+            final StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    downladuri = task.getResult();
+                                    place.setImage(downladuri.getPath());
+                                    savePlace(place);
+
+                                }
+                            });
+
+                            Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
+    }
+
 
 }

@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@android:color/secondary_text_dark_nodisable"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="30dp"-->
+<!--    tools:context=".MyUl.AddPlaceActivity">-->
+<!--</LinearLayout>-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/secondary_text_dark_nodisable"
-    android:orientation="vertical"
-    android:padding="30dp"
-    tools:context=".MyUl.AddPlaceActivity">
-
-
+    android:orientation="vertical">
     <ImageView
         android:id="@+id/Addimg"
         android:layout_width="match_parent"
         android:layout_height="184dp"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+       android:src="@mipmap/ic_launcher"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

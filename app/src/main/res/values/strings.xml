@@ -10,4 +10,13 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_map">Map</string>
+
+    <string-array name="category">
+        <item>category</item>
+        <item>shopping</item>
+        <item>restaurants</item>
+        <item>park</item>
+        <item>Sign out</item>
+
+    </string-array>
 </resources>

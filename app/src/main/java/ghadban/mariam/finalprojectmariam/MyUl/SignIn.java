@@ -69,12 +69,16 @@ public class SignIn extends AppCompatActivity {
             isOK = false;
             inEmail.setError("Wrong E-mail syntax");
         }
-        Myvaildations myVaildations = new Myvaildations();
-        if (myVaildations.validatePasword(Password) == false) {
+//        Myvaildations myVaildations = new Myvaildations();
+//        if (myVaildations.validatePasword(Password) == false) {
+//            isOK = false;
+//            inPassword.setError("Invalid Password");
+//        }
+        if(Password.length()<6) {
+
             isOK = false;
             inPassword.setError("Invalid Password");
         }
-
         if (isOK){
             signIn(Email,Password);
         }

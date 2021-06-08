@@ -14,11 +14,11 @@
 
         <Button
             android:id="@+id/ttadd"
-            android:layout_width="51dp"
-            android:layout_height="wrap_content"
-            android:background="#F6F4F4"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_rounded"
             android:text="+"
-            android:textColor="#F60B0B"
+            android:textColor="#FFFFFF"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -27,7 +27,8 @@
             android:layout_width="405dp"
             android:layout_height="49dp"
             android:layout_weight="1"
-
+            android:roundIcon="@drawable/common_google_signin_btn_text_light"
+            android:textColor="#B71C1C"
             android:paddingBottom="13dp"
 
             />

@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/cambo"
             android:hint="Store Name"
             android:inputType="text"
             android:textSize="20sp" />
@@ -55,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/cambo"
             android:hint="Location"
             android:inputType="text"
             android:textSize="20sp" />
@@ -74,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/cambo"
             android:hint="Category"
             android:inputType="text"
             android:textSize="20sp" />
@@ -93,7 +96,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Evaluation"
+            android:fontFamily="@font/cambo"
+            android:hint="Evaluation (1-5)"
             android:inputType="text"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -115,6 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_rounded"
+        android:fontFamily="@font/vidaloka"
         android:text="Save"
         android:textColor="#ffffff"
         android:textSize="22sp" />

@@ -1,10 +1,12 @@
 package ghadban.mariam.finalprojectmariam.MyUl;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.content.RestrictionEntry;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,11 +22,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import ghadban.mariam.finalprojectmariam.Data.ListAdapter;
+import ghadban.mariam.finalprojectmariam.Data.Place;
 import ghadban.mariam.finalprojectmariam.R;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback{
 
+    private ListAdapter lstdapter;
     private GoogleMap mMap;
     private Button ttadd;
     private Spinner spin;
@@ -103,5 +113,39 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback{
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        readTasksFromFirebase();
+    }
+
+    public void readTasksFromFirebase()
+    {
+        FirebaseDatabase database=FirebaseDatabase.getInstance();//to connect to database
+        FirebaseAuth auth=FirebaseAuth.getInstance();//to get current UID
+        String uid = auth.getUid();
+        DatabaseReference reference = database.getReference();
+
+        reference.child("Places").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                lstdapter.clear();
+                for (DataSnapshot d : dataSnapshot.getChildren())
+                {
+                    Place t=d.getValue(Place.class);
+                    Log.d("Place",t.toString());
+                    lstdapter.add(t);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 }

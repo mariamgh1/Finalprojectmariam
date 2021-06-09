@@ -15,12 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import ghadban.mariam.finalprojectmariam.MyUtils.Myvaildations;
 import ghadban.mariam.finalprojectmariam.R;
 
 public class SignIn extends AppCompatActivity {
     private EditText inEmail, inPassword;
-    private Button loginbtn, signupbtn, guestbtn;
+    private Button signinbtn, signupbtn, guestbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +38,11 @@ public class SignIn extends AppCompatActivity {
 
         inEmail = findViewById(R.id.inEmail);
         inPassword = findViewById(R.id.inPassword);
-        loginbtn = findViewById(R.id.loginbtn);
+        signinbtn = findViewById(R.id.signinbtn);
         signupbtn = findViewById(R.id.signupbtn);
         guestbtn = findViewById(R.id.guestbtn);
 
-        loginbtn.setOnClickListener(new View.OnClickListener() {
+        signinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateForm();

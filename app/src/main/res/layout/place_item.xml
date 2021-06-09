@@ -15,7 +15,7 @@
             android:id="@+id/relout"
             android:layout_width="match_parent"
             android:layout_height="143dp"
-            android:background="@color/cardview_dark_background">
+            android:background="#E0E0E0">
 
             <TextView
                 android:id="@+id/itmname"
@@ -27,8 +27,14 @@
                 android:layout_marginStart="124dp"
                 android:layout_marginLeft="124dp"
                 android:layout_marginTop="38dp"
-                android:text="name"
-                android:textColor="#ffffff" />
+                android:fontFamily="@font/vidaloka"
+                android:password="false"
+                android:text="Name"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#000000"
+                android:textSize="30sp" />
 
 
             <ImageView

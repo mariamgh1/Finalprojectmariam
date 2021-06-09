@@ -42,7 +42,7 @@ public class AddPlaceActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 100;
     private static final int IMAGE_PICK_CODE = 101;
 
-    private ListAdapter lstdapter;
+
     private ImageView Addimg;
     private EditText StoreName, Addlocation, AddCategory, Evaluation;
     private Button ttsave;
@@ -96,7 +96,7 @@ public class AddPlaceActivity extends AppCompatActivity {
         String sname = StoreName.getText().toString();
         String location = Addlocation.getText().toString();
         String category = AddCategory.getText().toString();
-        String evlu = Evaluation.getText().toString();
+        double evlu = Double.parseDouble(Evaluation.getText().toString());
         boolean isok = true;
         if (sname.length() < 2) {
             isok = false;
@@ -104,12 +104,15 @@ public class AddPlaceActivity extends AppCompatActivity {
         }
         if (location.length() < 3) {
             isok = false;
+            Addlocation.setError("at least 3 char");
         }
         if (category.length() < 3) {
             isok = false;
+            AddCategory.setError("at least one word");
         }
-        if (evlu.length() < 2) {
+        if (evlu < 2) {
             isok = false;
+            Evaluation.setError("maximum 5 points");
         }
         if(toUploadimageUri == null){
             isok = false;
@@ -155,41 +158,6 @@ public class AddPlaceActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        readTasksFromFirebase();
-    }
-
-    public void readTasksFromFirebase()
-    {
-        FirebaseDatabase database=FirebaseDatabase.getInstance();//to connect to database
-        FirebaseAuth auth=FirebaseAuth.getInstance();//to get current UID
-        String uid = auth.getUid();
-        DatabaseReference reference = database.getReference();
-
-        reference.child("Places");
-        reference.child(uid);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                lstdapter.clear();
-                for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    Place t = d.getValue(Place.class);
-                    Log.d(" Place ", t.toString());
-                    lstdapter.add(t);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
     }
 
     private void pickImageFromGallery(){

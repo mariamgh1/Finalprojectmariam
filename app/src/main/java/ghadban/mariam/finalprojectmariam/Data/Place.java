@@ -8,7 +8,7 @@ public class Place
         private static String name;//asm almkan
         private String location;//mo93
         private String category;//mjal almkan
-        private String Evaluation;// ta9im almkan
+        private double Evaluation;// ta9im almkan
         private String Image;
         private String owner;
         private String key;
@@ -38,8 +38,8 @@ public class Place
             this.category = category;
         }
 
-        public String getEvaluation() { return Evaluation; }
-        public void setEvaluation(String evaluation) { this.Evaluation = evaluation; }
+        public double getEvaluation() { return Evaluation; }
+        public void setEvaluation(double evaluation) { this.Evaluation = evaluation; }
 
         public String getImage() { return Image; }
         public void setImage(String Image) { this.Image = Image; }

@@ -15,11 +15,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <ImageView
         android:id="@+id/Addimg"
         android:layout_width="match_parent"
         android:layout_height="184dp"
-       android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        tools:srcCompat="@android:drawable/ic_menu_add" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

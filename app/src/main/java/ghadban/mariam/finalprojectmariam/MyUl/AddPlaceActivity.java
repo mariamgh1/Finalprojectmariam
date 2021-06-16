@@ -2,11 +2,14 @@ package ghadban.mariam.finalprojectmariam.MyUl;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +20,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +49,7 @@ import ghadban.mariam.finalprojectmariam.Data.Place;
 import ghadban.mariam.finalprojectmariam.Data.ListAdapter;
 import ghadban.mariam.finalprojectmariam.R;
 
+
 public class AddPlaceActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 100;
     private static final int IMAGE_PICK_CODE = 101;
@@ -49,6 +61,8 @@ public class AddPlaceActivity extends AppCompatActivity {
     private Uri toUploadimageUri;//local address
     private Uri downladuri;//firebase/cloude address
     private Place place;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +104,6 @@ public class AddPlaceActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void checkValidateForm() {
         String sname = StoreName.getText().toString();

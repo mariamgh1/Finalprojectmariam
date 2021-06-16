@@ -7,6 +7,8 @@ public class Place
 {
         private static String name;//asm almkan
         private String location;//mo93
+        private double lat;
+        private double lon;
         private String category;//mjal almkan
         private double Evaluation;// ta9im almkan
         private String Image;
@@ -20,8 +22,7 @@ public class Place
         public static String getName(){
             return name;
         }
-        public void setName(String name){
-            this.name = name;
+        public void setName(String name){ Place.name = name;
         }
 
         public String getLocation(){
@@ -30,6 +31,12 @@ public class Place
         public void setLocation(String location){
             this.location = location;
         }
+
+        public double getLat() { return lat; }
+        public void setLat(double lat) { this.lat = lat; }
+
+        public double getLon() { return lon; }
+        public void setLon(double lon) { this.lon = lon; }
 
         public String getCategory(){
             return category;
@@ -61,11 +68,15 @@ public class Place
 
     @Override
     public String toString() {
-        return "place{" +
-                "name='" + name + '\'' +
-                ", location='" + location + '\'' +
+        return "Place{" +
+                "location='" + location + '\'' +
+                ", lat=" + lat +
+                ", lon=" + lon +
                 ", category='" + category + '\'' +
-                ", Evaluation=" + Evaluation +'}';
+                ", Evaluation=" + Evaluation +
+                ", Image='" + Image + '\'' +
+                ", owner='" + owner + '\'' +
+                ", key='" + key + '\'' +
+                '}';
     }
-
 }

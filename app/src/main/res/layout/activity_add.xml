@@ -38,10 +38,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/cambo"
+            android:fontFamily="@font/merienda"
             android:hint="Store Name"
             android:inputType="text"
-            android:textSize="20sp" />
+            android:textColorHint="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -58,10 +60,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/cambo"
+            android:fontFamily="@font/merienda"
             android:hint="Location"
             android:inputType="text"
-            android:textSize="20sp" />
+            android:textColorHint="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -74,14 +78,16 @@
         >
 
         <EditText
-            android:id="@+id/AddCategory"
+            android:id="@+id/Addcategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/cambo"
+            android:fontFamily="@font/merienda"
             android:hint="Category"
             android:inputType="text"
-            android:textSize="20sp" />
+            android:textColorHint="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -94,14 +100,16 @@
         >
 
         <EditText
-            android:id="@+id/Evaluation"
+            android:id="@+id/evlauation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/cambo"
+            android:fontFamily="@font/merienda"
             android:hint="Evaluation (1-5)"
             android:inputType="text"
-            android:textSize="20sp" />
+            android:textColorHint="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

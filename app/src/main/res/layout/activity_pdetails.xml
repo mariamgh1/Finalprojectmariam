@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@android:color/secondary_text_dark_nodisable"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="30dp"-->
+<!--    tools:context=".MyUl.AddPlaceActivity">-->
+<!--</LinearLayout>-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    android:orientation="vertical"
-    android:padding="30dp"
-    tools:context=".MyUl.SignUp">
-
+    <ImageView
+        android:id="@+id/infimg"
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:src="@mipmap/ic_launcher"
+        tools:srcCompat="@android:drawable/ic_menu_add" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -20,15 +33,18 @@
 
         >
 
-        <EditText
-            android:id="@+id/etFullName"
+        <TextView
+            android:id="@+id/infnm"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/colorButtonNormal"
+            android:backgroundTint="?attr/colorButtonNormal"
             android:ems="10"
             android:fontFamily="@font/merienda"
-            android:hint="Full Name"
             android:inputType="text"
-            android:textColorHint="@android:color/holo_red_dark"
+            android:text="Name :"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -42,15 +58,17 @@
 
         >
 
-        <EditText
-            android:id="@+id/etUsername"
+        <TextView
+            android:id="@+id/infloc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="?attr/colorButtonNormal"
             android:ems="10"
             android:fontFamily="@font/merienda"
-            android:hint="Username"
             android:inputType="text"
-            android:textColorHint="@android:color/holo_red_dark"
+            android:text="Location :"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,15 +82,17 @@
 
         >
 
-        <EditText
-            android:id="@+id/etEmail"
+        <TextView
+            android:id="@+id/infcat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="?attr/colorButtonNormal"
             android:ems="10"
             android:fontFamily="@font/merienda"
-            android:hint="Email"
             android:inputType="text"
-            android:textColorHint="@android:color/holo_red_dark"
+            android:text="Category :"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -86,15 +106,17 @@
 
         >
 
-        <EditText
-            android:id="@+id/etPassword"
+        <TextView
+            android:id="@+id/infeva"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="?attr/colorButtonNormal"
             android:ems="10"
             android:fontFamily="@font/merienda"
-            android:hint="Password"
             android:inputType="text"
-            android:textColorHint="@android:color/holo_red_dark"
+            android:text="Evaluation (1-5) :"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -108,27 +130,16 @@
 
         >
 
-        <EditText
-            android:id="@+id/etConPassword"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:fontFamily="@font/merienda"
-            android:hint="Confirm Password"
-            android:inputType="text"
-            android:textColorHint="@android:color/holo_red_dark"
-            android:textSize="20sp"
-            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/savebtn"
+        android:id="@+id/gobtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_rounded"
-        android:fontFamily="@font/cambo"
-        android:text="Save"
+        android:fontFamily="@font/vidaloka"
+        android:text="GO"
         android:textColor="#ffffff"
         android:textSize="22sp" />
 

@@ -3,7 +3,7 @@ package ghadban.mariam.finalprojectmariam.MyUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
- * מחלקה שבודקת תקינות שדות כמו אימיל וסיסמא ועוד
+ *
  */
 public class Myvaildations
 {

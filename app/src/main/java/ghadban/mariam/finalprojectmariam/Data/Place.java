@@ -1,14 +1,13 @@
 package ghadban.mariam.finalprojectmariam.Data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.Serializable;
 
-public class Place
+public class Place implements Serializable
 {
-        private static String name;//asm almkan
+        private  String name;//asm almkan
         private String location;//mo93
         private double lat;
-        private double lon;
+        private double lng;
         private String category;//mjal almkan
         private double Evaluation;// ta9im almkan
         private String Image;
@@ -19,11 +18,8 @@ public class Place
     public Place(){
         }
 
-        public static String getName(){
-            return name;
-        }
-        public void setName(String name){ Place.name = name;
-        }
+        public String getName(){ return name; }
+        public void setName(String name){ this.name = name; }
 
         public String getLocation(){
             return location;
@@ -35,8 +31,8 @@ public class Place
         public double getLat() { return lat; }
         public void setLat(double lat) { this.lat = lat; }
 
-        public double getLon() { return lon; }
-        public void setLon(double lon) { this.lon = lon; }
+        public double getLng() { return lng; }
+        public void setLng(double lng) { this.lng = lng; }
 
         public String getCategory(){
             return category;
@@ -71,7 +67,7 @@ public class Place
         return "Place{" +
                 "location='" + location + '\'' +
                 ", lat=" + lat +
-                ", lon=" + lon +
+                ", lng=" + lng +
                 ", category='" + category + '\'' +
                 ", Evaluation=" + Evaluation +
                 ", Image='" + Image + '\'' +
@@ -80,3 +76,5 @@ public class Place
                 '}';
     }
 }
+
+

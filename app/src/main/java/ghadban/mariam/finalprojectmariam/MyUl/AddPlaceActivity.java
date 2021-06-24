@@ -2,42 +2,27 @@ package ghadban.mariam.finalprojectmariam.MyUl;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -46,7 +31,6 @@ import com.google.firebase.storage.UploadTask;
 import java.util.UUID;
 
 import ghadban.mariam.finalprojectmariam.Data.Place;
-import ghadban.mariam.finalprojectmariam.Data.ListAdapter;
 import ghadban.mariam.finalprojectmariam.R;
 
 
@@ -73,8 +57,8 @@ public class AddPlaceActivity extends AppCompatActivity {
         Addimg = findViewById(R.id.Addimg);
         StoreName = findViewById(R.id.StoreName);
         Addlocation = findViewById(R.id.Addlocation);
-        AddCategory = findViewById(R.id.AddCategory);
-        Evaluation = findViewById(R.id.Evaluation);
+        AddCategory = findViewById(R.id.Addcategory);
+        Evaluation = findViewById(R.id.evlauation);
         ttsave = findViewById(R.id.ttsave);
 
         ttsave.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +209,7 @@ public class AddPlaceActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     downladuri = task.getResult();
-                                    place.setImage(downladuri.getPath());
+                                    place.setImage(downladuri.toString());
                                     savePlace(place);
 
                                 }

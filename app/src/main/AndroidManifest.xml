@@ -49,6 +49,7 @@
         </intent-filter>
         </activity>
         <activity android:name=".MyUl.SignUp" />
+        <activity android:name=".MyUl.Pdetails"/>
 
     </application>
 

@@ -56,6 +56,14 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+        guestbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SignIn.this, MapActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
 

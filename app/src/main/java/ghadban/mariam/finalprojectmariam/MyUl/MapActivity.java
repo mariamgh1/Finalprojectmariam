@@ -46,7 +46,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
 import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -72,7 +71,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private ListView Stlist;
     private LocationRequest mLocationRequest;
     private Location lastLocation;
-
     Marker mCurrLocationMarker;
 
 
@@ -378,7 +376,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         String uid = auth.getUid();
         DatabaseReference reference = database.getReference();
 
-        reference.child("Places").child(uid).addValueEventListener(new ValueEventListener() {
+        reference.child("AllPlaces").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
@@ -387,7 +385,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 {
                     Place t=d.getValue(Place.class);
                     Log.d("Place",t.toString());
-                    if(stSearch==null || stSearch.length()==0) {
+                    if(Stlist==null) {
                         lstdapter.add(t);
                         Geocoder geocoder = new Geocoder(getBaseContext());
                         try {
@@ -403,7 +401,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         }
                     }
                   else{
-                  if (t.getName().contains(stSearch)) {
+                  if (t.getCategory().contains(stSearch)) {
                     lstdapter.add(t);
                   } }
                 }

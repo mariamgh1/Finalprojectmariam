@@ -12,9 +12,13 @@
     <string name="title_activity_map">Map</string>
 
     <string-array name="category">
-        <item>category</item>
-        <item>shopping</item>
-        <item>restaurants</item>
+        <item>select category</item>
+        <item>Clothing</item>
+        <item>Food</item>
+        <item>SuperMarket</item>
+        <item>Pet shop</item>
+        <item>Mall</item>
+        <item>Hospital</item>
         <item>park</item>
         <item>Sign out</item>
 

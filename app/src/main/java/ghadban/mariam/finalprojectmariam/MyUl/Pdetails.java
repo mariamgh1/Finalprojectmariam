@@ -3,6 +3,7 @@ package ghadban.mariam.finalprojectmariam.MyUl;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class Pdetails extends AppCompatActivity {
     private ImageView infoImg;
     private TextView infoName, infoLocation, infoCategory, infoEvaluation;
     private Button go;
+    private Place p ;
             ;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,13 @@ public class Pdetails extends AppCompatActivity {
         infoCategory = findViewById(R.id.infcat);
         infoEvaluation = findViewById(R.id.infeva);
         go = findViewById(R.id.gobtn);
+
+        go.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("geo:"+p.getLat()+","+p.getLng()));
+            Intent chooser = Intent.createChooser(intent,"Lauch Maps");
+            startActivity(chooser);
+        });
     }
 
 
@@ -44,7 +53,7 @@ public class Pdetails extends AppCompatActivity {
         super.onResume();
         Intent intent = getIntent();
         if(intent!= null){
-            Place p = (Place) intent.getExtras().get("place");
+             p = (Place) intent.getExtras().get("place");
             infoName.setText("Name : "+ p.getName());
             infoLocation.setText("Location : "+ p.getLocation());
             infoCategory.setText("Category : "+ p.getCategory());

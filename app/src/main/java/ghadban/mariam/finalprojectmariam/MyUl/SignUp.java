@@ -67,14 +67,6 @@ public class SignUp extends AppCompatActivity {
             isOK=false;
             etConPassword.setError("Password must be the same");
         }
-        else {
-//            Myvaildations myVaildations = new Myvaildations();
-//            if (myVaildations.validatePasword(pass) == false) {
-//                isOK = false;
-//                etPassword.setError("Invalid Password");
-//            }
-        }
-
         if(isOK)// isok=true
         {
             //todo : create account  and return to sign in screen/ close this screen

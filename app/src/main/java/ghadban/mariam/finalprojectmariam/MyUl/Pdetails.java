@@ -25,7 +25,7 @@ public class Pdetails extends AppCompatActivity {
     private TextView infoName, infoLocation, infoCategory, infoEvaluation;
     private Button go;
     private Place p ;
-            ;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdetails);
@@ -39,7 +39,7 @@ public class Pdetails extends AppCompatActivity {
         infoEvaluation = findViewById(R.id.infeva);
         go = findViewById(R.id.gobtn);
 
-        go.setOnClickListener(v -> {
+        go.setOnClickListener(v -> { // from button to place location on google map
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("geo:"+p.getLat()+","+p.getLng()));
             Intent chooser = Intent.createChooser(intent,"Lauch Maps");

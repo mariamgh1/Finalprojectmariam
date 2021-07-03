@@ -138,7 +138,7 @@ public class AddPlaceActivity extends AppCompatActivity {
         String uid = auth.getCurrentUser().getUid();
         //4. My Object Key
         String key = reference.child("Places").push().getKey();
-        //5. update ypur Object
+        //5. update your Object
         place.setOwner(uid);
         place.setKey(key);
         //6. actual stroring

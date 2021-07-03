@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/merienda"
-            android:hint="Store Name"
+            android:hint="Place Name"
             android:inputType="text"
             android:textColorHint="@android:color/holo_red_dark"
             android:textSize="20sp"

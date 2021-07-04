@@ -11,9 +11,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,6 +44,7 @@ public class AddPlaceActivity extends AppCompatActivity {
     private ImageView Addimg;
     private EditText StoreName, Addlocation, AddCategory, Evaluation;
     private Button ttsave;
+    private Spinner addCategory;
     private Uri toUploadimageUri;//local address
     private Uri downladuri;//firebase/cloude address
     private Place place;
@@ -55,11 +58,15 @@ public class AddPlaceActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Add a store");
 
         Addimg = findViewById(R.id.Addimg);
+        addCategory = findViewById(R.id.addCategory);
         StoreName = findViewById(R.id.StoreName);
         Addlocation = findViewById(R.id.Addlocation);
-        AddCategory = findViewById(R.id.Addcategory);
         Evaluation = findViewById(R.id.evlauation);
         ttsave = findViewById(R.id.ttsave);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.addCategory, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        addCategory.setAdapter(adapter);
 
         ttsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +99,6 @@ public class AddPlaceActivity extends AppCompatActivity {
     public void checkValidateForm() {
         String sname = StoreName.getText().toString();
         String location = Addlocation.getText().toString();
-        String category = AddCategory.getText().toString();
         double evlu = Double.parseDouble(Evaluation.getText().toString());
         boolean isok = true;
         if (sname.length() < 2) {
@@ -102,10 +108,6 @@ public class AddPlaceActivity extends AppCompatActivity {
         if (location.length() < 3) {
             isok = false;
             Addlocation.setError("at least 3 char");
-        }
-        if (category.length() < 3) {
-            isok = false;
-            AddCategory.setError("at least one word");
         }
         if (evlu < 2) {
             isok = false;
@@ -119,8 +121,8 @@ public class AddPlaceActivity extends AppCompatActivity {
             place=new Place();
             place.setName(sname);
             place.setLocation(location);
-            place.setCategory(category);
             place.setEvaluation(evlu);
+            place.setCategory((String) addCategory.getSelectedItem());
             uploadImage(toUploadimageUri);
     }
 
@@ -142,7 +144,7 @@ public class AddPlaceActivity extends AppCompatActivity {
         place.setOwner(uid);
         place.setKey(key);
         //6. actual stroring
-        reference.child("Places").child(uid).child(key).setValue(place).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child("Places").child(key).setValue(place).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {

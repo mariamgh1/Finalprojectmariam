@@ -13,7 +13,7 @@
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <ImageView
@@ -23,13 +23,19 @@
         android:src="@mipmap/ic_launcher"
         tools:srcCompat="@android:drawable/ic_menu_add" />
 
+    <Spinner
+        android:id="@+id/addCategory"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_weight="1" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:textColorHint="@android:color/holo_red_dark"
-        android:layout_marginTop="5dp"
 
         >
 
@@ -45,12 +51,13 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:layout_marginTop="5dp"
         android:textColorHint="@android:color/holo_red_dark"
 
         >
@@ -67,35 +74,24 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:textColorHint="@android:color/holo_red_dark"
-        android:layout_marginTop="5dp"
 
-        >
+        />
 
-        <EditText
-            android:id="@+id/Addcategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:fontFamily="@font/merienda"
-            android:hint="Category"
-            android:inputType="text"
-            android:textColorHint="@android:color/holo_red_dark"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:textColorHint="@android:color/holo_red_dark"
-        android:layout_marginTop="5dp"
 
         >
 
@@ -111,13 +107,14 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:textColorHint="@android:color/holo_red_dark"
-        android:layout_marginTop="5dp"
 
         >
 

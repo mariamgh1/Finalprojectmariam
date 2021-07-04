@@ -19,7 +19,7 @@ import ghadban.mariam.finalprojectmariam.R;
 
 public class SignIn extends AppCompatActivity {
     private EditText inEmail, inPassword;
-    private Button signinbtn, signupbtn, guestbtn;
+    private Button signinbtn, signupbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class SignIn extends AppCompatActivity {
         inPassword = findViewById(R.id.inPassword);
         signinbtn = findViewById(R.id.signinbtn);
         signupbtn = findViewById(R.id.signupbtn);
-        guestbtn = findViewById(R.id.guestbtn);
 
         signinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,14 +51,6 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SignIn.this, SignUp.class);
-                startActivity(i);
-            }
-        });
-
-        guestbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(SignIn.this, MapActivity.class);
                 startActivity(i);
             }
         });

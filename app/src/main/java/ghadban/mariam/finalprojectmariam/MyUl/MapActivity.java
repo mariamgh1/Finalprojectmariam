@@ -69,6 +69,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private Button ttadd;
     private Spinner spin;
     private ListView Stlist;
+    private String category;
     private LocationRequest mLocationRequest;
     private Location lastLocation;
     Marker mCurrLocationMarker;
@@ -90,18 +91,25 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         lstdapter = new ListAdapter(getApplicationContext(), R.layout.place_item);
         Stlist.setAdapter(lstdapter);
+        readTasksFromFirebase(null);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
+
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 4) {
+
+                if (position == 9) {
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.signOut();
                     Intent i = new Intent(MapActivity.this, SignIn.class);
                     startActivity(i);
+                }
+                else {
+                    String itemAtPosition = (String) parent.getItemAtPosition(position);
+                    readTasksFromFirebase(itemAtPosition);
                 }
             }
 
@@ -110,18 +118,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
             }
         });
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        readTasksFromFirebase(null);
 
-        ttadd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                if (firebaseAuth.getCurrentUser() != null) {
-                    Intent i = new Intent(MapActivity.this, AddPlaceActivity.class);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(MapActivity.this, "You have to sign in", Toast.LENGTH_SHORT).show();
-                }
-            }
+
+        ttadd.setOnClickListener(v -> {
+                Intent i = new Intent(MapActivity.this, AddPlaceActivity.class);
+                startActivity(i);
         });
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -228,10 +231,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 Log.i("MapActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
                 Polyline polyline1 = mMap.addPolyline(new PolylineOptions()
                         .clickable(true)
-                        .add(
-                                new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()),
-                                new LatLng(location.getLatitude(), location.getLongitude())
-                        ));
+                        .add(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()), new LatLng(location.getLatitude(), location.getLongitude())));
 
                 if(lastLocation==null)
                 {
@@ -376,34 +376,55 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         String uid = auth.getUid();
         DatabaseReference reference = database.getReference();
 
-        reference.child("AllPlaces").child(uid).addValueEventListener(new ValueEventListener() {
+        reference.child("Places").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 lstdapter.clear();
-                for (DataSnapshot d : dataSnapshot.getChildren())
-                {
-                    Place t=d.getValue(Place.class);
-                    Log.d("Place",t.toString());
-                    if(Stlist==null) {
-                        lstdapter.add(t);
-                        Geocoder geocoder = new Geocoder(getBaseContext());
-                        try {
-                            List<Address> addressList = geocoder.getFromLocationName(t.getLocation(), 4);
-                            if (addressList.size() > 0) {
-                                Address address = addressList.get(0);
-                                LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                                mMap.addMarker(new MarkerOptions().position(latLng).title(t.getName()));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,12));
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+
+                    Place t = d.getValue(Place.class);
+                    Log.d("Place", t.toString());
+                    if (Stlist == null) {
+                        if (category==null || category.length()==0)
+                        {
+                            lstdapter.add(t);
+
+                            Geocoder geocoder = new Geocoder(getBaseContext());
+                            try {
+                                List<Address> addressList = geocoder.getFromLocationName(t.getLocation(), 4);
+                                if (addressList.size() > 0) {
+                                    Address address = addressList.get(0);
+                                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                                    mMap.addMarker(new MarkerOptions().position(latLng).title(t.getName()));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IOException e){
-                            e.printStackTrace();
                         }
+                        else {
+                            if (t.getCategory().contains(category))
+                            {
+                                lstdapter.add(t);
+
+                                Geocoder geocoder = new Geocoder(getBaseContext());
+                                try {
+                                    List<Address> addressList = geocoder.getFromLocationName(t.getLocation(), 4);
+                                    if (addressList.size() > 0) {
+                                        Address address = addressList.get(0);
+                                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                                        mMap.addMarker(new MarkerOptions().position(latLng).title(t.getName()));
+                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    } else
+                        {
+                        lstdapter.add(t);
                     }
-                  else{
-                  if (t.getCategory().contains(stSearch)) {
-                    lstdapter.add(t);
-                  } }
                 }
             }
 
@@ -411,8 +432,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
-
-    });
+        });
     }
  }

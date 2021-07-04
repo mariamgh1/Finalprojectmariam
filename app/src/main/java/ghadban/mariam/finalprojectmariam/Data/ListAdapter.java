@@ -68,9 +68,6 @@ public class ListAdapter extends ArrayAdapter<Place> {
         //connect item view to data source
         tvName.setText(place.getName());
         //todo doanload and view image
-        //tvimg
-
-       // tvimg.setText(place.getImage());
         
 
         return vitem;

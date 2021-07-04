@@ -4,15 +4,16 @@ import java.io.Serializable;
 
 public class Place implements Serializable
 {
-        private  String name;//asm almkan
-        private String location;//mo93
+        private  String name="";//asm almkan
+        private String location="";//mo93
         private double lat;
         private double lng;
-        private String category;//mjal almkan
+        private String category="";//mjal almkan
         private double Evaluation;// ta9im almkan
-        private String Image;
-        private String owner;
-        private String key;
+        private String Image="";
+        private String owner="";
+        private String key="";
+
 
 
     public Place(){
@@ -34,9 +35,7 @@ public class Place implements Serializable
         public double getLng() { return lng; }
         public void setLng(double lng) { this.lng = lng; }
 
-        public String getCategory(){
-            return category;
-        }
+        public String getCategory() { return category; }
         public void setCategory(String category){
             this.category = category;
         }
@@ -75,6 +74,7 @@ public class Place implements Serializable
                 ", key='" + key + '\'' +
                 '}';
     }
+
 }
 
 

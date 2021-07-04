@@ -25,13 +25,15 @@
         <Spinner
             android:id="@+id/spin"
             android:layout_width="405dp"
-            android:layout_height="49dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingBottom="13dp"
             android:roundIcon="@drawable/common_google_signin_btn_text_light"
             android:textColor="#B71C1C"
-            android:paddingBottom="13dp"
 
             />
+
+
     </LinearLayout>
 
     <fragment

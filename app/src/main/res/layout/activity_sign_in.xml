@@ -88,18 +88,6 @@
         android:textColor="#ffffff"
         android:textSize="22sp" />
 
-    <Button
-        android:id="@+id/guestbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_rounded"
-        android:fontFamily="@font/cambo"
-        android:onClick="btn_map"
-        android:text="Guest"
-        android:textColor="#ffffff"
-        android:textSize="22sp" />
-
     <ImageView
         android:layout_width="406dp"
         android:layout_height="267dp"

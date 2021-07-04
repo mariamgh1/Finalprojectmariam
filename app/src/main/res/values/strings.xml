@@ -18,9 +18,23 @@
         <item>SuperMarket</item>
         <item>Pet shop</item>
         <item>Mall</item>
+        <item>School/University</item>
         <item>Hospital</item>
         <item>park</item>
         <item>Sign out</item>
+
+    </string-array>
+
+    <string-array name="addCategory">
+        <item>select category</item>
+        <item>Clothing</item>
+        <item>Food</item>
+        <item>SuperMarket</item>
+        <item>Pet shop</item>
+        <item>Mall</item>
+        <item>School/University</item>
+        <item>Hospital</item>
+        <item>park</item>
 
     </string-array>
 </resources>

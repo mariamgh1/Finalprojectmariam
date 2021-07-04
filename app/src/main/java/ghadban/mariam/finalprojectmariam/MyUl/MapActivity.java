@@ -229,7 +229,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 //The last location in the list is the newest
                 Location location = locationList.get(locationList.size() - 1);
                 Log.i("MapActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
-                Polyline polyline1 = mMap.addPolyline(new PolylineOptions()
+                Polyline polyline1;
+                polyline1 = mMap.addPolyline(new PolylineOptions()
                         .clickable(true)
                         .add(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()), new LatLng(location.getLatitude(), location.getLongitude())));
 

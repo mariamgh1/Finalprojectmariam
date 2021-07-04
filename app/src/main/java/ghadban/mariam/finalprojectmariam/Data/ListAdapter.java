@@ -61,6 +61,7 @@ public class ListAdapter extends ArrayAdapter<Place> {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), Pdetails.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("place",place);
                 getContext().startActivity(i);
             }

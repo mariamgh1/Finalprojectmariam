@@ -37,7 +37,7 @@ public class Pdetails extends AppCompatActivity {
         go.setOnClickListener(v -> { // from button to place location on google map
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("geo:"+p.getLat()+","+p.getLng()));
-            Intent chooser = Intent.createChooser(intent,"Lauch Maps");
+            Intent chooser = Intent.createChooser(intent,"Lauch Maps");//  נתחנט Intent
             startActivity(chooser);
         });
     }
